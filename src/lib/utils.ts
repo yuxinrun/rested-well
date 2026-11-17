@@ -37,3 +37,18 @@ export function clamp(value: number, min: number, max: number): number {
 export function uid(): string {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
 }
+
+/**
+ * GitHub Pages 项目站点部署在 /<repo> 子路径下。
+ * next/image 在 unoptimized 模式下不会自动为本地字符串 src 加 basePath，
+ * 因此需要在这里手动补齐，避免图片请求落到域名根目录而 404。
+ * 远程地址、data URI 以及已带前缀的路径保持不变。
+ */
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+
+export function withBasePath(src: string): string {
+  if (!BASE_PATH) return src;
+  if (!src.startsWith('/')) return src;
+  if (src.startsWith('//') || src.startsWith(`${BASE_PATH}/`) || src === BASE_PATH) return src;
+  return `${BASE_PATH}${src}`;
+}

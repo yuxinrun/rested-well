@@ -35,7 +35,8 @@ jobs:
       - name: Build static site
         env:
           GH_PAGES: '1'
-          NEXT_PUBLIC_SITE_URL: https://yuxinrun.github.io/rested-well
+          NEXT_PUBLIC_BASE_PATH: /rested-well
+          NEXT_PUBLIC_SITE_URL: https://www.yuxin.run/rested-well
         run: npm run build
 
       - name: Add .nojekyll

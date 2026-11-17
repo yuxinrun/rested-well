@@ -4,7 +4,8 @@
 // 普通开发与 Vercel 部署不设置该变量，行为保持不变。
 const isGhPages = process.env.GH_PAGES === '1';
 // 项目站点部署在 https://<user>.github.io/<repo>/ 子路径下。
-const basePath = isGhPages ? '/rested-well' : '';
+// 同时通过 NEXT_PUBLIC_BASE_PATH 暴露给客户端，供 unoptimized 图片的本地路径补齐前缀。
+const basePath = isGhPages ? (process.env.NEXT_PUBLIC_BASE_PATH ?? '/rested-well') : '';
 
 const nextConfig = {
   reactStrictMode: true,

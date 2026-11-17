@@ -3,14 +3,14 @@
 import Image, { type ImageProps } from 'next/image';
 import { useState } from 'react';
 import { ImageOff } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn, withBasePath } from '@/lib/utils';
 
 type SmartImageProps = Omit<ImageProps, 'onError'> & {
   wrapperClassName?: string;
 };
 
 /** 为常见的图库地址补上尺寸与压缩参数，减少传输体积 */
-function optimizeSrc(src: ImageProps['src']) {
+function optimizeSrc(src: string): string {
   if (typeof src !== 'string') return src;
   if (src.includes('images.unsplash.com') && !src.includes('?')) {
     return `${src}?auto=format&fit=crop&w=1600&q=78`;
@@ -27,6 +27,7 @@ function optimizeSrc(src: ImageProps['src']) {
  */
 export function SmartImage({ className, wrapperClassName, alt, src, ...props }: SmartImageProps) {
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+  const finalSrc = typeof src === 'string' ? withBasePath(optimizeSrc(src)) : src;
 
   return (
     <div className={cn('relative overflow-hidden bg-cream-200', wrapperClassName)}>
@@ -55,7 +56,7 @@ export function SmartImage({ className, wrapperClassName, alt, src, ...props }: 
           className
         )}
         alt={alt}
-        src={optimizeSrc(src)}
+        src={finalSrc}
         onLoad={() => setStatus('ready')}
         onError={() => setStatus('error')}
         {...props}

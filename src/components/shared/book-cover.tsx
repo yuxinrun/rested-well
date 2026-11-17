@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { cn } from '@/lib/utils';
+import { cn, withBasePath } from '@/lib/utils';
 
 export function BookCover({
   src,
@@ -38,7 +38,7 @@ export function BookCover({
       </div>
       {!failed && src && (
         <Image
-          src={src}
+          src={withBasePath(src)}
           alt={`${title} 封面`}
           fill
           sizes="(max-width: 640px) 45vw, 220px"
