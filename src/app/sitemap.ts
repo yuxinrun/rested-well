@@ -6,6 +6,8 @@ import { scenarios } from '@/data/scenarios';
 import { researchTopics } from '@/data/research-topics';
 import { getArticleSlugs } from '@/lib/articles';
 
+export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteConfig.url.replace(/\/$/, '');
   const now = new Date();
