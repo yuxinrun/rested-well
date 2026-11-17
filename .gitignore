@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+dist
+.env*.local
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+*.log
+.vercel
+
+# 本地测试与临时产物
+.playwright-cli
+*.pid

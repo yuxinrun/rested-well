@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', STSong, SimSun, Georgia, serif;
+  --font-sans: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-cream-50 text-ink font-sans antialiased;
+    font-feature-settings: 'kern' 1;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    @apply bg-sage-200 text-sage-900;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-serif text-ink;
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-sage-500 ring-offset-2 ring-offset-cream-50;
+  }
+}
+
+@layer components {
+  .container-content {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8 lg:px-10;
+  }
+
+  .section-pad {
+    @apply py-16 sm:py-20 lg:py-28;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-sage-600;
+  }
+
+  .eyebrow::before {
+    content: '';
+    @apply inline-block h-px w-6 bg-sage-400;
+  }
+
+  .card-base {
+    @apply rounded-2xl border border-ink/[0.07] bg-white/70 shadow-card backdrop-blur-sm;
+  }
+
+  .card-lift {
+    @apply card-base transition-all duration-300 hover:-translate-y-1 hover:shadow-lift;
+  }
+
+  .btn-shine {
+    @apply relative overflow-hidden;
+  }
+
+  .prose-rw {
+    @apply text-[17px] leading-[1.9] text-ink-soft;
+  }
+  .prose-rw h2 {
+    @apply mt-14 mb-5 font-serif text-2xl font-semibold text-ink sm:text-[28px];
+  }
+  .prose-rw h3 {
+    @apply mt-9 mb-3 font-serif text-xl font-semibold text-ink;
+  }
+  .prose-rw h4 {
+    @apply mt-7 mb-2 font-serif text-lg font-semibold text-ink;
+  }
+  .prose-rw p {
+    @apply my-5;
+  }
+  .prose-rw strong {
+    @apply font-semibold text-ink;
+  }
+  .prose-rw a {
+    @apply text-sage-700 underline decoration-sage-300 underline-offset-4 transition-colors hover:text-sage-900 hover:decoration-sage-600;
+  }
+  .prose-rw ul {
+    @apply my-5 list-disc space-y-2 pl-6 marker:text-sage-400;
+  }
+  .prose-rw ol {
+    @apply my-5 list-decimal space-y-2 pl-6 marker:text-sage-500;
+  }
+  .prose-rw li {
+    @apply pl-1;
+  }
+  .prose-rw blockquote {
+    @apply my-8 border-l-[3px] border-sage-300 bg-sage-50/60 py-4 pl-6 pr-4 font-serif text-lg italic text-sage-800 rounded-r-xl;
+  }
+  .prose-rw blockquote p {
+    @apply my-0;
+  }
+  .prose-rw hr {
+    @apply my-12 border-ink/10;
+  }
+  .prose-rw table {
+    @apply my-7 w-full border-collapse overflow-hidden rounded-xl text-sm;
+  }
+  .prose-rw th {
+    @apply border-b border-sage-200 bg-sage-50 px-4 py-3 text-left font-semibold text-ink;
+  }
+  .prose-rw td {
+    @apply border-b border-ink/[0.06] px-4 py-3 align-top;
+  }
+  .prose-rw code {
+    @apply rounded bg-ink/5 px-1.5 py-0.5 font-mono text-[0.9em] text-sage-800;
+  }
+  .prose-rw img {
+    @apply my-8 rounded-2xl;
+  }
+
+  .note-box {
+    @apply my-7 rounded-2xl border border-apricot-200 bg-apricot-50/70 p-5 sm:p-6;
+  }
+  .note-box p {
+    @apply my-1 text-[15px] leading-7 text-ink-soft;
+  }
+  .note-box .note-title {
+    @apply mb-2 flex items-center gap-2 font-semibold text-apricot-500;
+  }
+
+  .skeleton-shimmer {
+    background: linear-gradient(90deg, #f0ece2 25%, #f8f5ec 50%, #f0ece2 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.6s infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* 隐藏滚动条但保留功能 */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* 尊重减少动效偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
